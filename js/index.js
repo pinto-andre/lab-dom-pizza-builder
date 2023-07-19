@@ -102,12 +102,20 @@ function renderPrice() {
   const priceListElement = document.querySelector('.price ul');
   const totalPriceElement = document.querySelector('.price strong');
   let totalPrice = basePrice;
-  
-  //couldn't wrap my mind to get how i'll connect the state with prices.
-  //innerHTML will change the strong tag but I couldn't find the ways to write it...
-}
+  priceListElement.innerHTML = '';
 
-  
+  for (const ingredient in state) {
+    if (state[ingredient]){
+      const ingredientPrice = ingredients[ingredient].price;
+      totalPrice += ingredientPrice;
+      const listItem = document.createElement('li');
+      listItem.textContent = `$${ingredientPrice} ${ingredients[ingredient].name}`;
+      priceListElement.appendChild(listItem);
+    }
+  }
+  totalPriceElement.textContent = `$${totalPrice}`
+
+  }
 
 
 renderEverything();
